@@ -3,62 +3,116 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercise tracker</title>
+    <title>Add Exercise</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
     <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" href="./css/jqm-demos.css">
+    <link rel="stylesheet" href="../assets/css/jqm-demos.css">
     <script src="./js/jquery.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/jquery.mobile-1.4.5.min.js"></script>
-    <script>
-		$(function() {
-			$( "[data-role='navbar']" ).navbar();
-			$( "[data-role='header'], [data-role='footer']" ).toolbar();
-		});
-		// Update the contents of the toolbars
-		$( document ).on( "pagecontainerchange", function() {
-			// Each of the four pages in this demo has a data-title attribute
-			// which value is equal to the text of the nav button
-			// For example, on first page: <div data-role="page" data-title="Info">
-			var current = $( ".ui-page-active" ).jqmData( "title" );
-			// Change the heading
-			$( "[data-role='header'] h1" ).text( current );
-			// Remove active class from nav buttons
-			$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
-			// Add active class to current nav button
-			$( "[data-role='navbar'] a" ).each(function() {
-				if ( $( this ).text() === current ) {
-					$( this ).addClass( "ui-btn-active" );
-				}
-			});
-		});
-	</script>
+    <title>Title</title>
+
 </head>
+
 <body>
-<div data-role="header" data-position="fixed" data-theme="a">
-    <a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-    <h1>Albums</h1>
-</div><!-- /header -->
 
-<div data-role="page" data-title="Albums">
+<form>
 
-    <div class="ui-content" role="main">
+    <h1>Add Exercise</h1>
 
-        <h1>Add exercise</h1>
+    <label for="select-choice-a" class="select">Select type of train:</label>
+    <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+            <option>Select Type</option>
+            <option value="aerobic" onclick="aerobicClicked()">Aerobic</option>
+        <option value="anaerobic">Anaerobic</option>
+            <option value="anaerobic-w">Anaerobic - Weightlifting</option>
+    </select>
 
-    </div><!-- /content -->
+    <label for="select-choice-a" class="select">Select type of exercise:</label>
 
-</div><!-- /page -->
+    <div id="type-aerobic">
+        <select name="select-choice-b" id="select-choice-b" data-native-menu="false">
+            <option>Select Type</option>
+            <option value="running">Running</option>
+            <option value="walking">Walking</option>
+            <option value="swimming">Swimming</option>
+            <option value="cycling">Cycling</option>
+            <option value="boxing">Boxing</option>
+        </select>
+    </div>
 
-<div data-role="footer" data-position="fixed" data-theme="a">
-    <div data-role="navbar">
-        <ul>
-            <li><a href="main.html" data-prefetch="true" data-transition="fade">Info</a></li>
-            <li><a href="addExercise.html" data-prefetch="true" data-transition="flip">Add Exercise</a></li>
-            <li><a href="stats.html" data-prefetch="true" data-transition="turn">Stats</a></li>
-        </ul>
-    </div><!-- /navbar -->
-</div><!-- /footer -->
+    <div id="type-anaerobic">
+        <select name="select-choice-c" id="select-choice-c" data-native-menu="false">
+            <option>Select Type</option>
+            <option value="running">Pushups</option>
+            <option value="walking">Situps</option>
+            <option value="swimming">Pull-ups</option>
+            <option value="cycling">Squats</option>
+        </select>
+    </div>
+
+    <div id="type-anaerobic-w">
+        <select name="select-choice-d" id="select-choice-d" data-native-menu="false">
+            <option>Select Type</option>
+            <option value="bench-press">Bench press</option>
+            <option value="overhead-press">Overhead press</option>
+            <option value="push-press">Push press</option>
+            <option value="deadlift">Deadlift</option>
+        </select>
+    </div>
+
+
+    <input type="button" value="Add item to list" onclick="appendToList()"/>
+
+
+
+    <div data-role="footer" data-position="fixed" data-theme="a">
+
+
+        <div data-role="navbar">
+            <ul>
+                <li><a href="main.html" data-prefetch="true" data-transition="fade">Main</a></li>
+                <li><a href="addExercise.html" data-prefetch="true" data-transition="flip">Add Exercise</a></li>
+                <li><a href="stats.html" data-prefetch="true" data-transition="turn">Statistics</a></li>
+            </ul>
+        </div><!-- /navbar -->
+
+    </div><!-- /footer -->
+</form>
+
+<script>
+    $("#type-aerobic").hide();
+    $("#type-anaerobic").hide();
+    $("#type-anaerobic-w").hide();
+    $('select').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        if(valueSelected === "aerobic"){
+            $("#type-aerobic").show();
+            $("#type-anaerobic").hide();
+            $("#type-anaerobic-w").hide();
+        }
+        if(valueSelected === "anaerobic") {
+            $("#type-anaerobic").show();
+            $("#type-aerobic").hide();
+            $("#type-anaerobic-w").hide();
+        }
+        if(valueSelected === "anaerobic-w") {
+            $("#type-anaerobic-w").show();
+            $("#type-aerobic").hide();
+            $("#type-anaerobic").hide();
+
+        }
+    });
+
+    function appendToList() {
+        $("#select-choice-a").append("<option value='rush'>nuuuuuu</option>");
+        $("#select-choice-a").selectmenu('refresh', true);
+        console.log($("#select-choice-a").value);
+    }
+
+
+</script>
 
 </body>
 </html>
