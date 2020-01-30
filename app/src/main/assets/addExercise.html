@@ -15,54 +15,40 @@
 </head>
 
 <body>
-
 <form>
-
     <h1>Add Exercise</h1>
 
-    <label for="select-choice-a" class="select">Select type of train:</label>
-    <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
-            <option>Select Type</option>
+    <label for="type-train" class="select">Select type of train:</label>
+    <select id="type-train" data-native-menu="false">
+            <option>Select type of train</option>
             <option value="aerobic" onclick="aerobicClicked()">Aerobic</option>
         <option value="anaerobic">Anaerobic</option>
             <option value="anaerobic-w">Anaerobic - Weightlifting</option>
     </select>
 
-    <label for="select-choice-a" class="select">Select type of exercise:</label>
 
-    <div id="type-aerobic">
-        <select name="select-choice-b" id="select-choice-b" data-native-menu="false">
-            <option>Select Type</option>
-            <option value="running">Running</option>
-            <option value="walking">Walking</option>
-            <option value="swimming">Swimming</option>
-            <option value="cycling">Cycling</option>
-            <option value="boxing">Boxing</option>
-        </select>
+
+    <div id="div-type-exercise">
+
     </div>
 
-    <div id="type-anaerobic">
-        <select name="select-choice-c" id="select-choice-c" data-native-menu="false">
-            <option>Select Type</option>
-            <option value="running">Pushups</option>
-            <option value="walking">Situps</option>
-            <option value="swimming">Pull-ups</option>
-            <option value="cycling">Squats</option>
-        </select>
+    <div id="div-check-box-1">
+
     </div>
 
-    <div id="type-anaerobic-w">
-        <select name="select-choice-d" id="select-choice-d" data-native-menu="false">
-            <option>Select Type</option>
-            <option value="bench-press">Bench press</option>
-            <option value="overhead-press">Overhead press</option>
-            <option value="push-press">Push press</option>
-            <option value="deadlift">Deadlift</option>
-        </select>
+    <div id="div-input-time">
+
     </div>
 
+    <div id="div-check-box-2">
 
-    <input type="button" value="Add item to list" onclick="appendToList()"/>
+    </div>
+
+    <div id="div-input-distance">
+
+    </div>
+
+    <input type="button" value="Add Exercise" onclick="appendToList()"/>
 
 
 
@@ -78,41 +64,85 @@
         </div><!-- /navbar -->
 
     </div><!-- /footer -->
+
 </form>
 
 <script>
-    $("#type-aerobic").hide();
-    $("#type-anaerobic").hide();
-    $("#type-anaerobic-w").hide();
-    $('select').on('change', function (e) {
-        var optionSelected = $("option:selected", this);
-        var valueSelected = this.value;
-        if(valueSelected === "aerobic"){
-            $("#type-aerobic").show();
-            $("#type-anaerobic").hide();
-            $("#type-anaerobic-w").hide();
+        $(document).ready(function() {
+
+            $('#type-train').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                if (valueSelected === "aerobic") {
+                    $("#div-type-exercise").empty();
+                    $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
+                        "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>" +
+                        "<option>Select Type</option>\n"+
+                        "<option value=\"running\">Running</option>\n" +
+                        "<option value=\"walking\">Walking</option>\n" +
+                        "<option value=\"swimming\">Swimming</option>\n" +
+                        "<option value=\"cycling\">Cycling</option>\n" +
+                        "<option value=\"boxing\">Boxing</option></select>")
+                }
+                if (valueSelected === "anaerobic"){
+                    $("#div-type-exercise").empty();
+                    $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
+                        "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>" +
+                        "<option>Select Type</option>\n"+
+                        "<option value=\"running\">Pushups</option>\n" +
+                        "<option value=\"walking\">Situps</option>\n" +
+                        "<option value=\"swimming\">Pull-ups</option>\n" +
+                        "<option value=\"cycling\">Squats</option></select>")
+                }
+                if (valueSelected === "anaerobic-w"){
+                    $("#div-type-exercise").empty();
+                    $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
+                        "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>"+
+                        "<option>Select Type</option>\n"+
+                        "<option value=\"bench-press\">Bench press</option>\n"+
+                        "<option value=\"overhead-press\">Overhead press</option>\n" +
+                        "<option value=\"push-press\">Push press</option>\n" +
+                        "<option value=\"deadlift\">Deadlift</option></select>")
+                }
+
+                $("#div-type-exercise").enhanceWithin(); //refresh style
+
+            })
+
+        })
+        function onExerciseChange(){
+            $("#div-check-box-1").empty();
+            $("#div-check-box-2").empty();
+            $("#div-check-box-1").append("<label><input id=\"cb-time\" type=\"checkbox\" onclick='onClickTime()' data-tt-lable=\"add distance\"/>Add time</label>");
+            $("#div-check-box-2").append("<label><input id=\"cb-distance\" type=\"checkbox\" onclick='onClickDistance()' data-tt-lable=\"add distance\"/>Add distance</label>");
+            $("#div-check-box-1").enhanceWithin(); //refresh style
+            $("#div-check-box-2").enhanceWithin(); //refresh style
         }
-        if(valueSelected === "anaerobic") {
-            $("#type-anaerobic").show();
-            $("#type-aerobic").hide();
-            $("#type-anaerobic-w").hide();
+
+        function onClickTime(){
+            if( $('#cb-time').is(":checked") ) {
+                $("#div-input-time").append("<input id='input-time' type='number'/>");
+                $("#div-input-time").enhanceWithin();
+            }
+            else $("#input-time").remove();
         }
-        if(valueSelected === "anaerobic-w") {
-            $("#type-anaerobic-w").show();
-            $("#type-aerobic").hide();
-            $("#type-anaerobic").hide();
 
+        function onClickDistance(){
+            if( $('#cb-distance').is(":checked") ) {
+                $("#div-input-distance").append("<input id='input-distance' type='number'/>");
+                $("#div-input-distance").enhanceWithin();
+            }
+            else $("#input-distance").remove();
         }
-    });
 
-    function appendToList() {
-        $("#select-choice-a").append("<option value='rush'>nuuuuuu</option>");
-        $("#select-choice-a").selectmenu('refresh', true);
-        console.log($("#select-choice-a").value);
-    }
+        // function appendToList() {
+        //     $("#select-choice-a").append("<option value='rush'>nuuuuuu</option>");
+        //     $("#select-choice-a").selectmenu('refresh', true);
+        //     console.log($("#select-choice-a").value);
+        // }
 
 
-</script>
+    </script>
 
 </body>
 </html>
