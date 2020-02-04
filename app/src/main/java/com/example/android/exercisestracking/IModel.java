@@ -2,5 +2,5 @@ package com.example.android.exercisestracking;
 
 public interface IModel {
 
-    public String returnString();
+    public String addExerciseToDB(String trainType, String exerciseType, String time, String Distance);
 }

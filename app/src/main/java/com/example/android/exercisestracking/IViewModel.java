@@ -2,5 +2,5 @@ package com.example.android.exercisestracking;
 
 public interface IViewModel {
 
-    public void fetchMyExercises ();
+    public void addExercise (String trainType, String exerciseType, String time, String distance);
 }
