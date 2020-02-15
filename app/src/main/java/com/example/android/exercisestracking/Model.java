@@ -14,11 +14,10 @@ import java.util.ArrayList;
 public class Model extends SQLiteOpenHelper implements IModel {
 
     private static final String DATABASE_NAME = "exercises_db";
-    public static final String TRAIN_NAME = "train_name";
-    public static final String COUNTRY_POPULATION = "population";
-    public static final String TABLE_NAME = "train_type";
-    public static final String TABLE_NAME2 = "exercise_type";
-    public static final String EXERCISE_NAME = "exercise_name";
+    private static final String TRAIN_NAME = "train_name";
+    private static final String TABLE_NAME = "train_type";
+    private static final String TABLE_NAME2 = "exercise_type";
+    private static final String EXERCISE_NAME = "exercise_name";
 
     public Model(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -31,8 +30,7 @@ public class Model extends SQLiteOpenHelper implements IModel {
             bf.append(exerciseType);
             bf.append(time);
             bf.append(distance);
-        final String result = bf.toString();
-        return result;
+        return bf.toString();
     }
 
     @Override
@@ -48,7 +46,7 @@ public class Model extends SQLiteOpenHelper implements IModel {
         values.put(TRAIN_NAME, "Anaerobic - Weightlifting");
         database.insert(TABLE_NAME, null, values);
 
-        //exercises table
+        //addExercise table
         database.execSQL("CREATE TABLE "+ TABLE_NAME2
                 +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +TRAIN_NAME+" TEXT, " +EXERCISE_NAME+" TEXT);");
         values.put(TRAIN_NAME, "Aerobic");

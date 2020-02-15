@@ -1,45 +1,5 @@
 $(document).ready(function() {
-
     fetchTrains();
-
-    // $('#type-train').on('change', function (e) {
-    //     var optionSelected = $("option:selected", this);
-    //     var valueSelected = this.value;
-    //     if (valueSelected === "Aerobic") {
-    //         $("#div-type-exercise").empty();
-    //         $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
-    //             "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>" +
-    //             "<option>Select Type</option>\n"+
-    //             "<option value=\"running\">Running</option>\n" +
-    //             "<option value=\"walking\">Walking</option>\n" +
-    //             "<option value=\"swimming\">Swimming</option>\n" +
-    //             "<option value=\"cycling\">Cycling</option>\n" +
-    //             "<option value=\"boxing\">Boxing</option></select>")
-    //     }
-    //     if (valueSelected === "anaerobic"){
-    //         $("#div-type-exercise").empty();
-    //         $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
-    //             "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>" +
-    //             "<option>Select Type</option>\n"+
-    //             "<option value=\"running\">Pushups</option>\n" +
-    //             "<option value=\"walking\">Situps</option>\n" +
-    //             "<option value=\"swimming\">Pull-ups</option>\n" +
-    //             "<option value=\"cycling\">Squats</option></select>")
-    //     }
-    //     if (valueSelected === "anaerobic-w"){
-    //         $("#div-type-exercise").empty();
-    //         $("#div-type-exercise").append("<label for=\"type-exercise\" class=\"select\">Select type of exercise:</label>" +
-    //             "<select id='type-exercise' data-native-menu='false' onchange='onExerciseChange()'>"+
-    //             "<option>Select Type</option>\n"+
-    //             "<option value=\"bench-press\">Bench press</option>\n"+
-    //             "<option value=\"overhead-press\">Overhead press</option>\n" +
-    //             "<option value=\"push-press\">Push press</option>\n" +
-    //             "<option value=\"deadlift\">Deadlift</option></select>")
-    //     }
-    //
-    //       $("#div-type-exercise").enhanceWithin(); //refresh style
-    //
-    // })
 });
 
 function onTrainChange() {
