@@ -1,9 +1,24 @@
 var greetingMsg = '';
+var greetingImgPath = '';
 setGreetingMsg();
+setGreetingImg();
 
 function setGreetingMsg() {
-	var currentHour = getCurrentHourTime();
-	document.getElementById('greetingMsg').innerHTML = getGreetingMsg(currentHour);
+	document.getElementById('greetingMsg').innerHTML = getGreetingMsg(getCurrentHourTime());
+}
+
+function setGreetingImg() {
+	var image = document.getElementById('greetingImg');
+	image.setAttribute("src", getGreetingImgPath(getCurrentHourTime()));
+}
+
+function getGreetingImgPath(currentHour) {
+    	if ((currentHour < 12) && (currentHour >= 6))
+    		return "./images/morningImg.JPG";
+    	else if ((currentHour < 18) && (currentHour >= 12))
+    		return "./images/afternoonImg.JPG";
+    	else
+    		return "./images/eveningImg.JPG";
 }
 
 function getGreetingMsg(currentHour) {
