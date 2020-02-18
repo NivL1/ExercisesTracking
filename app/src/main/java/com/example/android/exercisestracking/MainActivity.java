@@ -21,38 +21,9 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         setContentView(webView);
-        webView.loadUrl("file:///android_asset/main.html");
+        webView.loadUrl("file:///android_asset/index.html");
         ViewModel viewModel = new ViewModel(webView, model);
         webView.addJavascriptInterface(viewModel, "vm");
     }
-//
-//        new Thread() {
-//            public void run() {
-//                int i = 0 ;
-//                    try {
-//                        runOnUiThread(new Runnable() {
-//
-//                            @Override
-//                            public void run() {
-//                                System.out.println(Thread.currentThread().getName());
-//                                IModel m = new Model();
-//                                IView v = new View();
-//                                startView();
-//                                IViewModel vm = new ViewModel();
-//                                v.setViewModel(vm);
-//                                vm.setModel(m);
-//
-//                            }
-//                        });
-//                        Thread.sleep(300);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//        }.start();
-//    }
-
-
-
 }
 

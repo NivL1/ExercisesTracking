@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Exercise</title>
+    <link rel="stylesheet" href="../../cssLib/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../../cssLib/jqm-demos.css">
+    <script src="../../jsLib/jquery.js"></script>
+    <script src="../../index.js"></script>
+    <script src="../../jsLib/widgestWorkArounds.js"></script>
+    <script src="../../jsLib/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+    <form id="form">
+        <h1>Add Exercise</h1>
+
+        <div id="div-type-train"> </div>
+
+        <div id="div-type-exercise"> </div>
+
+        <div id="div-check-box-1"> </div>
+
+        <div id="div-input-time"> </div>
+
+        <div id="div-check-box-2"> </div>
+
+        <div id="div-input-distance"> </div>
+
+        <input type="button" value="Add Exercise" onclick="addExercise()"/>
+        <input type="button" value="Check Fetching" onclick="checkFetching()"/>
+        <input type="text" id="output">
+
+    </form>
+
+    <script>
+
+    </script>
+</body>
+
+<footer data-position="fixed" data-theme="a">
+    <div data-role="navbar">
+        <ul>
+            <li><a href="../../index.html" data-prefetch="true" data-transition="fade">Main</a></li>
+            <li><a href="addExercise.html" data-prefetch="true" data-transition="flip">Add Exercise</a></li>
+            <li><a href="../statistics/statistics.html" data-prefetch="true" data-transition="turn">Statistics</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="addExercise.js"></script>
+</html>
