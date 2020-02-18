@@ -204,13 +204,13 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 				'data-ajax-warning': true
 			});
 
-			message
-			.append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p>The Ajax-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
-
-			$( document ).on( "pagecreate", function( event ) {
-				$( event.target ).append( message );
-			});
+			// message
+			// .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
+			// .append( "<p>The Ajax-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
+			//
+			// $( document ).on( "pagecreate", function( event ) {
+			// 	$( event.target ).append( message );
+			// });
 		});
 	});
 }
