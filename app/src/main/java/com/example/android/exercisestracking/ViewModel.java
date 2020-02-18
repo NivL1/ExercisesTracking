@@ -19,9 +19,9 @@ public class ViewModel extends Activity implements IViewModel {
     }
 
     @android.webkit.JavascriptInterface
-    public void addExercise (String trainType, String exerciseType, String time, String distance) {
+    public void commitExerciseJava(String trainType, String exerciseType, String time, String distance) {
 
-        final String toShow = model.addExerciseToDB(trainType,exerciseType,time,distance);
+        final String toShow = model.commitExerciseToDB(trainType,exerciseType,time,distance);
         
         pool.submit(new Runnable() {
             @Override

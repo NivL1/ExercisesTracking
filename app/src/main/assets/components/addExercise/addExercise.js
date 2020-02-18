@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function onTrainChange() {
-
+    $("#div-type-exercise").empty();
     window.vm.fetchExercisesFromDB($("#type-train").val());
 
 }
@@ -12,12 +12,14 @@ function onTrainChange() {
 function onExerciseChange(){
     $("#div-check-box-1").empty();
     $("#div-check-box-2").empty();
-    $("#div-check-box-1").append("<label><input id=\"cb-time\" type=\"checkbox\" onclick='onClickTime()' data-tt-lable=\"add distance\"/>Add time</label>");
+    $("#div-check-box-1").append("<label><input id=\"cb-time\" type=\"checkbox\" onclick='onClickTime()' data-tt-lable=\"add distance\"/>Add duration time</label>");
     $("#div-check-box-2").append("<label><input id=\"cb-distance\" type=\"checkbox\" onclick='onClickDistance()' data-tt-lable=\"add distance\"/>Add distance</label>");
     $("#div-check-box-1").enhanceWithin(); //refresh style
     $("#div-check-box-2").enhanceWithin(); //refresh style
 }
 
+
+        <!--        TODO fix time/distance double bag  -->
 function onClickTime(){
     if( $('#cb-time').is(":checked") ) {
         $("#div-input-time").append("<input id='input-time' type='number'/>");
@@ -37,7 +39,7 @@ function onClickDistance(){
 function fetchTrains() {
     window.vm.fetchTrainsFromDB();
 
-  //  showTrainsType("asdaks|fffasda|Asdaf");
+   // showTrains("asdaks|fffasda|Asdaf");
 }
 
 function showTrains(trainsString) {
@@ -73,8 +75,8 @@ function showExercises(exercisesString) {
     $("#div-type-exercise").enhanceWithin();
 }
 
-function addExercise() {
-    window.vm.addExercise( $("#type-train").val() , $("#type-exercise").val() ,
+function commitExercise() {
+    window.vm.commitExerciseJava( $("#type-train").val() , $("#type-exercise").val() ,
         $('#cb-time').is(":checked") ? $("#input-time").val() : null ,
         $('#cb-distance').is(":checked") ? $("#input-distance").val() : null );
 }
