@@ -1,0 +1,11 @@
+.greeting {
+    text-align: center;
+    font-size: 30px;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
