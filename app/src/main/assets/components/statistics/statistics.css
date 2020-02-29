@@ -1,0 +1,10 @@
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+table, td {
+  border: 1px solid black;
+}
