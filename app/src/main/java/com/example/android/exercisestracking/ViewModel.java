@@ -8,13 +8,13 @@ import java.util.concurrent.Executors;
 
 public class ViewModel extends Activity implements IViewModel {
 
-    Model model;
+    DatabaseHelper model;
     WebView webView;
     ExecutorService pool;
 
-    ViewModel(WebView webView, Model model){
+    ViewModel(WebView webView, DatabaseHelper model){
         this.model = model;
-        this. webView = webView;
+        this.webView = webView;
         pool = Executors.newFixedThreadPool(4);
     }
 
@@ -43,7 +43,7 @@ public class ViewModel extends Activity implements IViewModel {
     @android.webkit.JavascriptInterface
     public void fetchTrainsFromDB() {
         String[] trainsArr = model.getTrainTypes();
-        StringBuffer bf = new StringBuffer();
+        StringBuilder bf = new StringBuilder();
         for (String str: trainsArr) {
             bf.append(str);
             bf.append("|");
@@ -54,8 +54,6 @@ public class ViewModel extends Activity implements IViewModel {
         pool.submit(new Runnable() {
             @Override
             public void run() {
-
-
                 ViewModel.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -69,7 +67,7 @@ public class ViewModel extends Activity implements IViewModel {
     @android.webkit.JavascriptInterface
     public void fetchExercisesFromDB(String value) {
         String[] exercisesArr = model.getExercises(value);
-        StringBuffer bf = new StringBuffer();
+        StringBuilder bf = new StringBuilder();
         for (String str: exercisesArr) {
             bf.append(str);
             bf.append("|");

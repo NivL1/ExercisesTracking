@@ -1,6 +1,4 @@
-$(document).ready(function() {
-    fetchTrains();
-});
+fetchTrains();
 
 function onTrainChange() {
     $("#div-type-exercise").empty();
@@ -38,8 +36,6 @@ function onClickDistance(){
 
 function fetchTrains() {
     window.vm.fetchTrainsFromDB();
-
-   // showTrains("asdaks|fffasda|Asdaf");
 }
 
 function showTrains(trainsString) {

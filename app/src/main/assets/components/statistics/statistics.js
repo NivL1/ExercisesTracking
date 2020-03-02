@@ -52,7 +52,6 @@ function applyLocalFileBrowsing() {
 }
 
 
-
 function createStatisticsTable()
 {
 	let table = document.getElementById("statisticsTable");
