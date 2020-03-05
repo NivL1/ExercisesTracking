@@ -34,17 +34,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
 
 
     public String commitExerciseToDB(String trainType, String exerciseType, String time, String distance){
-        //context works?
-        DatabaseHelper dbHelper = new DatabaseHelper(sqlHelper);
-//        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(TRAIN_TYPE, trainType);
-//        values.put(EXERCISE_TYPE, exerciseType);
-//        values.put(TIME, time);
-//        values.put(DISTANCE, distance);
-//        long newRowID = db.insert(TABLE_NAME3, null, values);
-        long newRowID = 5;
-        return trainType + exerciseType + time + distance + newRowID;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TRAIN_TYPE, trainType);
+        values.put(EXERCISE_TYPE, exerciseType);
+        values.put(TIME, time);
+        values.put(DISTANCE, distance);
+        long newRowID = db.insert(TABLE_NAME3, null, values);
+        return "" + newRowID;
     }
 
     @Override

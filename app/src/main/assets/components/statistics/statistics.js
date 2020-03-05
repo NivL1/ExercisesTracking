@@ -2,6 +2,9 @@ applyLocalFileBrowsing()
 createStatisticsTable()
 
 
+fetchCommittedExercises()
+
+
 // Turn off Ajax for local file browsing
 function applyLocalFileBrowsing() {
 	if ( location.protocol.substr(0,4)  === 'file' ||
@@ -73,4 +76,8 @@ function getStatisticsValue() {
 function getStatisticsNames() {
 	let arr = ["test1", "test2", "test3"];
 	return arr
+}
+
+function fetchCommittedExercises() {
+    window.vm.fetchCommittedExercisesFromDb();
 }

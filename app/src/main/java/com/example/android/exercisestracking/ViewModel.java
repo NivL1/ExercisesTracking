@@ -21,9 +21,7 @@ public class ViewModel extends Activity implements IViewModel {
 
     @android.webkit.JavascriptInterface
     public void commitExerciseJava(String trainType, String exerciseType, String time, String distance) {
-        if ((trainType != null) && (exerciseType != null)) {
-            final String toShow = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
-        }
+        final String toShow = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
     }
 
     @android.webkit.JavascriptInterface
@@ -74,4 +72,28 @@ public class ViewModel extends Activity implements IViewModel {
         });
     }
 
+    @android.webkit.JavascriptInterface
+    public void fetchCommittedExercisesFromDb() {
+        Log.i("viewModel", "fetch commited exercises pressed");
+//        String[] exercisesArr = databaseHelper.getExercises(selectedTrain);
+//        StringBuilder bf = new StringBuilder();
+//        for (String str: exercisesArr) {
+//            bf.append(str);
+//            bf.append("|");
+//        }
+//        final String exercisesString = bf.toString();
+//
+//
+//        pool.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//                ViewModel.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        webView.evaluateJavascript("showExercises('"+exercisesString+"')", null);
+//                    }
+//                });
+//            }
+//        });
+    }
 }
