@@ -14,28 +14,44 @@
 </head>
 
 <body>
-
     <form id="form">
+
         <h1>Add Exercise</h1>
 
-        <div id="div-type-train"> </div>
+        <div class="normal-text"> select train type </div>
+        <select id="train-select" onchange="onTrainChange()">
+            <option selected disabled>Select Train Type</option>
+        </select>
 
-        <div id="div-type-exercise"> </div>
+        <div id="exercise-div" class="hidden"> select exercise type
+            <select id="exercise-select" onchange="onExerciseChange()">
+                <option selected disabled>Select Exercise Type</option>
+            </select>
+        </div>
 
-        <div id="div-check-box-1"> </div>
+        <div id="duration-div" class="hidden">
+            <label>Add duration time
+                <input type="checkbox" id="duration-check-box" onchange="durationCheckBoxClick()">
+            </label>
+        </div>
 
-        <div id="div-input-time"> </div>
+        <div id="input-time-div" class="hidden">
+            <input id='input-time' type='number'>
+        </div>
 
-        <div id="div-check-box-2"> </div>
+        <div id="distance-div" class="hidden">
+            <label>Add distance time
+                <input type="checkbox" id="distance-check-box" onchange="distanceCheckBoxClick()">
+            </label>
+        </div>
 
-        <div id="div-input-distance"> </div>
+        <div id="input-distance-div" class="hidden">
+            <input id='input-distance' type='number'>
+        </div>
 
         <input type="button" value="Commit Exercise" onclick="commitExercise()"/>
-        <input type="button" value="Check Fetching" onclick="checkFetching()"/>
-        <input type="text" id="output">
 
     </form>
-
 </body>
 
 <footer data-position="fixed" data-theme="a">

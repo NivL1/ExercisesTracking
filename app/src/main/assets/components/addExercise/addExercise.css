@@ -4,3 +4,12 @@
     left: 0;
     width: 100%;
 }
+
+.normal-text {
+      font-size: 18px;
+}
+
+.hidden {
+       font-size: 18px;
+       visibility: hidden;
+ }

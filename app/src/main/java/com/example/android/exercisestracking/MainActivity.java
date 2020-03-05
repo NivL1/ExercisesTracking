@@ -12,13 +12,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DatabaseHelper model = new DatabaseHelper(getApplicationContext());
+        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
         WebView webView = new WebView(this);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         setContentView(webView);
         webView.loadUrl("file:///android_asset/index.html");
-        ViewModel viewModel = new ViewModel(webView, model);
+        ViewModel viewModel = new ViewModel(webView, databaseHelper);
         webView.addJavascriptInterface(viewModel, "vm");
     }
 }

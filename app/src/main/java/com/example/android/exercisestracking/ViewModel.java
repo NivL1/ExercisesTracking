@@ -1,6 +1,7 @@
 package com.example.android.exercisestracking;
 
 import android.app.Activity;
+import android.util.Log;
 import android.webkit.WebView;
 
 import java.util.concurrent.ExecutorService;
@@ -8,41 +9,26 @@ import java.util.concurrent.Executors;
 
 public class ViewModel extends Activity implements IViewModel {
 
-    DatabaseHelper model;
+    DatabaseHelper databaseHelper;
     WebView webView;
     ExecutorService pool;
 
-    ViewModel(WebView webView, DatabaseHelper model){
-        this.model = model;
+    ViewModel(WebView webView, DatabaseHelper databaseHelper){
+        this.databaseHelper = databaseHelper;
         this.webView = webView;
         pool = Executors.newFixedThreadPool(4);
     }
 
     @android.webkit.JavascriptInterface
     public void commitExerciseJava(String trainType, String exerciseType, String time, String distance) {
-
-        final String toShow = model.commitExerciseToDB(trainType,exerciseType,time,distance);
-        
-        pool.submit(new Runnable() {
-            @Override
-            public void run() {
-
-
-                ViewModel.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        webView.evaluateJavascript("showStr('"+toShow+"')", null);
-                   
-                    }
-                });
-            }
-        });
+        if ((trainType != null) && (exerciseType != null)) {
+            final String toShow = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
+        }
     }
 
     @android.webkit.JavascriptInterface
     public void fetchTrainsFromDB() {
-        String[] trainsArr = model.getTrainTypes();
+        String[] trainsArr = databaseHelper.getTrainTypes();
         StringBuilder bf = new StringBuilder();
         for (String str: trainsArr) {
             bf.append(str);
@@ -65,8 +51,8 @@ public class ViewModel extends Activity implements IViewModel {
     }
 
     @android.webkit.JavascriptInterface
-    public void fetchExercisesFromDB(String value) {
-        String[] exercisesArr = model.getExercises(value);
+    public void fetchExercisesFromDB(String selectedTrain) {
+        String[] exercisesArr = databaseHelper.getExercises(selectedTrain);
         StringBuilder bf = new StringBuilder();
         for (String str: exercisesArr) {
             bf.append(str);
@@ -78,8 +64,6 @@ public class ViewModel extends Activity implements IViewModel {
         pool.submit(new Runnable() {
             @Override
             public void run() {
-
-
                 ViewModel.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -89,4 +73,5 @@ public class ViewModel extends Activity implements IViewModel {
             }
         });
     }
+
 }

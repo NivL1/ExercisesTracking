@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,20 +29,21 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
         this.sqlHelper = context;
+        Log.i("helper", "helper created");
     }
 
 
     public String commitExerciseToDB(String trainType, String exerciseType, String time, String distance){
         //context works?
         DatabaseHelper dbHelper = new DatabaseHelper(sqlHelper);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(TRAIN_TYPE, trainType);
-        values.put(EXERCISE_TYPE, exerciseType);
-        values.put(TIME, time);
-        values.put(DISTANCE, distance);
-        long newRowID = db.insert(TABLE_NAME3, null, values);
-
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(TRAIN_TYPE, trainType);
+//        values.put(EXERCISE_TYPE, exerciseType);
+//        values.put(TIME, time);
+//        values.put(DISTANCE, distance);
+//        long newRowID = db.insert(TABLE_NAME3, null, values);
+        long newRowID = 5;
         return trainType + exerciseType + time + distance + newRowID;
     }
 
@@ -191,5 +194,24 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
     private void createCommittedExercisesTable(SQLiteDatabase database) {
         database.execSQL("CREATE TABLE "+ TABLE_NAME3
                 +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT, " +TIME+" TEXT, " +DISTANCE+" TEXT);");
+    }
+
+    public void testDb() {
+        Log.i("dbModel","test db running");
+
+
+    }
+
+    public void printToLogcatTableNames() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+
+        if (c.moveToFirst()) {
+            while ( !c.isAfterLast() ) {
+                Log.i("dbModel",c.getString(0));
+                c.moveToNext();
+            }
+        }
+        c.close();
     }
 }
