@@ -1,8 +1,12 @@
-applyLocalFileBrowsing()
-createStatisticsTable()
+var tableNumOfCols = 0;
+var tableNumOfRows = 0;
+var committedExercisesTable = [];
 
-
-fetchCommittedExercises()
+applyLocalFileBrowsing();
+fetchCommittedExercises();
+createStatisticsTable();
+//TODO create a promise istead of simple sleep
+setTimeout(() => { createStatisticsTable(); }, 500);
 
 
 // Turn off Ajax for local file browsing
@@ -54,30 +58,41 @@ function applyLocalFileBrowsing() {
 	}
 }
 
-
 function createStatisticsTable()
 {
 	let table = document.getElementById("statisticsTable");
-	let statisticsValueArray = getStatisticsValue();
-	let statisticsNamesArray = getStatisticsNames();
-	statisticsValueArray.forEach(function (statisticsValue, index) {
+	committedExercisesTable.forEach(function (committedRow, index) {
 		let row = table.insertRow(index);
-		row.insertCell(0).innerHTML = statisticsNamesArray[index]
-		row.insertCell(1).innerHTML = statisticsValue
+		for (col = 0; col < tableNumOfCols; col++) {
+		    row.insertCell(col).innerHTML = committedRow[col]
+		}
 	})
 }
 
-//TODO pull statistics from DB
-function getStatisticsValue() {
-	let arr = [1, 2.22, 333];
-	return arr;
-}
-
-function getStatisticsNames() {
-	let arr = ["test1", "test2", "test3"];
-	return arr
-}
-
 function fetchCommittedExercises() {
+    window.vm.getCommittedExercisesCols();
+    window.vm.getCommittedExercisesRows();
     window.vm.fetchCommittedExercisesFromDb();
+}
+
+function putCommittedExercises(committedExercisesString) {
+    var committedExercisesArray = committedExercisesString.split("|");
+    committedExercisesArray.pop();
+
+    var rowArray = []
+    for (i = 0; i < tableNumOfRows; i++) {
+        for (j = 0; j < tableNumOfCols; j++) {
+            rowArray.push(committedExercisesArray[i * tableNumOfCols + j]);
+        }
+        committedExercisesTable.push(rowArray);
+        rowArray= [];
+    }
+}
+
+function setCommittedExercisesCols(num) {
+    tableNumOfCols = num;
+}
+
+function setCommittedExercisesRows(num) {
+    tableNumOfRows = num;
 }

@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -193,22 +191,38 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
                 +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT, " +TIME+" TEXT, " +DISTANCE+" TEXT);");
     }
 
-    public void testDb() {
-        Log.i("dbModel","test db running");
-
-
-    }
-
-    public void printToLogcatTableNames() {
+    public String[][] getCommittedExercises() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        Cursor committedExercisesTableCursor = db.rawQuery("SELECT * from commited_exercises",null);
+        int tableNumOfCols = committedExercisesTableCursor.getColumnCount();
+        int tableNumOfRows = committedExercisesTableCursor.getCount();
+        String[][] committedExercisesTable = new String[tableNumOfRows][tableNumOfCols];
 
-        if (c.moveToFirst()) {
-            while ( !c.isAfterLast() ) {
-                Log.i("dbModel",c.getString(0));
-                c.moveToNext();
+        if (committedExercisesTableCursor.moveToFirst()) {
+            while (!committedExercisesTableCursor.isAfterLast()) {
+                for (int i = 0; i < tableNumOfCols; i++) {
+                    committedExercisesTable[committedExercisesTableCursor.getPosition()][i] = committedExercisesTableCursor.getString(i);
+                }
+                committedExercisesTableCursor.moveToNext();
             }
         }
-        c.close();
+
+        committedExercisesTableCursor.close();
+        return committedExercisesTable;
     }
+
+//        TODO close cursor on getCommittedExercisesRows and getCommittedExercisesCols without causing assert
+    public int getCommittedExercisesCols() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor committedExercisesTableCursor = db.rawQuery("SELECT * from commited_exercises",null);
+        return committedExercisesTableCursor.getColumnCount();
+    }
+
+    public int getCommittedExercisesRows() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor committedExercisesTableCursor = db.rawQuery("SELECT * from commited_exercises",null);
+        return committedExercisesTableCursor.getCount();
+    }
+
+
 }

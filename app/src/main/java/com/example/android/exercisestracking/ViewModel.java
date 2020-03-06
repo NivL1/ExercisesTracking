@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.webkit.WebView;
 
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -74,26 +76,61 @@ public class ViewModel extends Activity implements IViewModel {
 
     @android.webkit.JavascriptInterface
     public void fetchCommittedExercisesFromDb() {
-        Log.i("viewModel", "fetch commited exercises pressed");
-//        String[] exercisesArr = databaseHelper.getExercises(selectedTrain);
-//        StringBuilder bf = new StringBuilder();
-//        for (String str: exercisesArr) {
-//            bf.append(str);
-//            bf.append("|");
-//        }
-//        final String exercisesString = bf.toString();
-//
-//
-//        pool.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//                ViewModel.this.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        webView.evaluateJavascript("showExercises('"+exercisesString+"')", null);
-//                    }
-//                });
-//            }
-//        });
+        String[][] committedExercisesArr = databaseHelper.getCommittedExercises();
+
+        StringBuilder bf = new StringBuilder();
+        for (String[] strings : committedExercisesArr) {
+            for (int col = 0; col < strings.length; col++) {
+                bf.append(strings[col]);
+                bf.append("|");
+            }
+        }
+        final String committedExerciseTableString = bf.toString();
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("putCommittedExercises('"+committedExerciseTableString+"')", null);
+                    }
+                });
+            }
+        });
+    }
+
+    @android.webkit.JavascriptInterface
+    public void getCommittedExercisesCols() {
+        final int colsNum = databaseHelper.getCommittedExercisesCols();
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("setCommittedExercisesCols('"+colsNum+"')", null);
+                    }
+                });
+            }
+        });
+    }
+
+    @android.webkit.JavascriptInterface
+    public void getCommittedExercisesRows() {
+        final int rowsNum = databaseHelper.getCommittedExercisesRows();
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("setCommittedExercisesRows('"+rowsNum+"')", null);
+                    }
+                });
+            }
+        });
     }
 }
