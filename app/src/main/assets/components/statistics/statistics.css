@@ -5,6 +5,17 @@
     width: 100%;
 }
 
-table, td {
-  border: 1px solid black;
+table {
+    font-size: 13px;
+    margin: 0 auto;
+}
+
+td {
+    border: 1px solid black;
+    width: 1px;
+    white-space: nowrap;
+}
+
+body {
+    width: 100%;
 }

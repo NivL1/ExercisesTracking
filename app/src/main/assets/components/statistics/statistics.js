@@ -4,7 +4,6 @@ var committedExercisesTable = [];
 
 applyLocalFileBrowsing();
 fetchCommittedExercises();
-createStatisticsTable();
 //TODO create a promise istead of simple sleep
 setTimeout(() => { createStatisticsTable(); }, 500);
 
@@ -61,8 +60,9 @@ function applyLocalFileBrowsing() {
 function createStatisticsTable()
 {
 	let table = document.getElementById("statisticsTable");
+	addColTitle(table);
 	committedExercisesTable.forEach(function (committedRow, index) {
-		let row = table.insertRow(index);
+		let row = table.insertRow(index+1);
 		for (col = 0; col < tableNumOfCols; col++) {
 		    row.insertCell(col).innerHTML = committedRow[col]
 		}
@@ -95,4 +95,12 @@ function setCommittedExercisesCols(num) {
 
 function setCommittedExercisesRows(num) {
     tableNumOfRows = num;
+}
+
+function addColTitle(table) {
+    var tableTitles = ["ID", "Exercise type", "Train type", "Time", "Distance"];
+    let row = table.insertRow(0);
+    tableTitles.forEach(function (titleName, index) {
+        row.insertCell(index).innerHTML = tableTitles[index];
+    })
 }
