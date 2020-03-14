@@ -1,7 +1,14 @@
 var greetingMsg = '';
 var greetingImgPath = '';
+var tableNumOfCols = 0;
+var tableNumOfRows = 0;
+var committedExercisesTable = [];
+
+
 setGreetingMsg();
 setGreetingImg();
+setLastThreeTrainings();
+
 
 function setGreetingMsg() {
 	document.getElementById('greetingMsg').innerHTML = getGreetingMsg(getCurrentHourTime());
@@ -42,4 +49,55 @@ function fetchData(){
 function showExercises(str) {
 	var ob = document.getElementById("output");
 	ob.value = str;
+}
+
+function showLastThreeTrainings(lastThreeTrainings) {
+    lastThreeTrainings.forEach(function (training, index) {
+        document.getElementById('train_' + index).innerHTML = training;
+    })
+}
+
+function getLastThreeTrainings() {
+    var lastThreeTrainings = [];
+    committedExercisesTable.forEach(function (row, index) {
+        lastThreeTrainings.push(row[2]);
+    })
+    return lastThreeTrainings;
+}
+
+function fetchCommittedExercises() {
+    window.vm.getCommittedExercisesCols();
+    window.vm.getCommittedExercisesRows();
+    window.vm.fetchCommittedExercisesFromDb();
+}
+
+function putCommittedExercises(committedExercisesString) {
+    var committedExercisesArray = committedExercisesString.split("|");
+    committedExercisesArray.pop();
+
+    var rowArray = []
+    for (i = 0; i < tableNumOfRows; i++) {
+        for (j = 0; j < tableNumOfCols; j++) {
+            rowArray.push(committedExercisesArray[i * tableNumOfCols + j]);
+        }
+        committedExercisesTable.push(rowArray);
+        rowArray= [];
+    }
+}
+
+function setLastThreeTrainings() {
+    fetchCommittedExercises();
+    setTimeout(() => {
+        lastThreeTrainings = getLastThreeTrainings();
+        showLastThreeTrainings(lastThreeTrainings);
+    }, 500);
+
+}
+
+function setCommittedExercisesCols(num) {
+    tableNumOfCols = num;
+}
+
+function setCommittedExercisesRows(num) {
+    tableNumOfRows = num;
 }
