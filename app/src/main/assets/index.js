@@ -52,9 +52,12 @@ function showExercises(str) {
 }
 
 function showLastThreeTrainings(lastThreeTrainings) {
-    lastThreeTrainings.forEach(function (training, index) {
-        document.getElementById('train_' + index).innerHTML = training;
-    })
+    if (lastThreeTrainings.length != 0) {
+        showTrainsDisplay();
+        lastThreeTrainings.forEach(function (training, index) {
+            document.getElementById('train_' + index).innerHTML = training;
+        })
+    }
 }
 
 function getLastThreeTrainings() {
@@ -100,4 +103,14 @@ function setCommittedExercisesCols(num) {
 
 function setCommittedExercisesRows(num) {
     tableNumOfRows = num;
+}
+
+function showTrainsDisplay() {
+    var divs = document.getElementsByTagName('div');
+    for(var i = divs.length; i--;) {
+        var div = divs[i];
+        if(div.className === 'trainsDisplay') {
+            div.style.display = 'block';
+        }
+    }
 }
