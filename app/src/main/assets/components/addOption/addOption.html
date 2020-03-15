@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Statistics</title>
+    <title>Add Option</title>
     <link rel="stylesheet" href="../../cssLib/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" href="../../cssLib/jqm-demos.css">
-    <link rel="stylesheet" href="statistics.css">
+    <link rel="stylesheet" href="addOption.css">
     <script src="../../jsLib/jquery.js"></script>
     <script src="../../jsLib/widgestWorkArounds.js"></script>
     <script src="../../jsLib/jquery.mobile-1.4.5.min.js"></script>
@@ -15,19 +15,35 @@
 </head>
 
 <body>
-    <table id="statisticsTable"> </table>
+
+    <div id="div-option" > Select train / exercise option to add
+        <select id="select-option" onchange="onOptionToAddChange()">
+            <option selected disabled hidden>Select Train / Exercise</option>
+            <option>Train</option>
+            <option>Exercise</option>
+        </select>
+    </div>
+
+    <div id="div-option-selected" >
+
+    </div>
+
+    <input type="submit" value="Submit" onclick="submitToDB()">
+
 </body>
 
+// TODO css fixed position at the bottom
 <footer data-position="fixed" data-theme="a">
     <div class="bottom" data-role="navbar">
         <ul>
             <li><a href="../../index.html" data-prefetch="true" data-transition="fade">Main</a></li>
             <li><a href="../addExercise/addExercise.html" data-prefetch="true" data-transition="flip">Add Exercise</a></li>
-            <li><a href="../addOption/addOption.html" data-prefetch="true" data-transition="turn">Add Option</a></li>
-            <li><a href="statistics.html" data-prefetch="true" data-transition="turn">Statistics</a></li>
+            <li><a href="addOption.html" data-prefetch="true" data-transition="turn">Add Option</a></li>
+            <li><a href="../statistics/statistics.html" data-prefetch="true" data-transition="turn">Statistics</a></li>
         </ul>
     </div>
 </footer>
 
-<script src="statistics.js"></script>
+<script src="addOption.js"></script>
+<script src="../addExercise/addExercise.js"></script>
 </html>

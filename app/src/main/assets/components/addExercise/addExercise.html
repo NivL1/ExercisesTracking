@@ -18,38 +18,22 @@
 
         <h1>Add Exercise</h1>
 
-        <div class="normal-text"> select train type </div>
-        <select id="train-select" onchange="onTrainChange()">
-            <option selected disabled hidden>Select Train Type</option>
-        </select>
+        <div id="div-type-train"> </div>
 
-        <div id="exercise-div" class="hidden"> select exercise type
-            <select id="exercise-select" onchange="onExerciseChange()">
-                <option selected disabled hidden>Select Exercise Type</option>
-            </select>
-        </div>
+        <div id="div-type-exercise"> </div>
 
-        <div id="duration-div" class="hidden">
-            <label>Add duration time
-                <input type="checkbox" id="duration-check-box" onchange="durationCheckBoxClick()">
-            </label>
-        </div>
+        <div id="div-check-box-1"> </div>
 
-        <div id="input-time-div" class="hidden">
-            <input id='input-time' type='number'>
-        </div>
+        <div id="div-input-duration"> </div>
 
-        <div id="distance-div" class="hidden">
-            <label>Add distance time
-                <input type="checkbox" id="distance-check-box" onchange="distanceCheckBoxClick()">
-            </label>
-        </div>
+        <div id="div-check-box-2"> </div>
 
-        <div id="input-distance-div" class="hidden">
-            <input id='input-distance' type='number'>
-        </div>
+        <div id="div-input-distance"> </div>
 
         <input type="button" value="Commit Exercise" onclick="commitExercise()"/>
+
+        <div id="dialog" title="Dialog Title" style="display:none"> Some text</div>
+
 
     </form>
 </body>
@@ -59,6 +43,7 @@
         <ul>
             <li><a href="../../index.html" data-prefetch="true" data-transition="fade">Main</a></li>
             <li><a href="addExercise.html" data-prefetch="true" data-transition="flip">Add Exercise</a></li>
+            <li><a href="../addOption/addOption.html" data-prefetch="true" data-transition="turn">Add Option</a></li>
             <li><a href="../statistics/statistics.html" data-prefetch="true" data-transition="turn">Statistics</a></li>
         </ul>
     </div>
