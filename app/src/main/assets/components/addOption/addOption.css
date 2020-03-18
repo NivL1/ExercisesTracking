@@ -1,3 +1,10 @@
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
 .hidden {
     font-size: 18px;
     visibility: hidden;

@@ -30,18 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
         Log.i("helper", "helper created");
     }
 
-
-    public String commitExerciseToDB(String trainType, String exerciseType, String time, String distance){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(TRAIN_TYPE, trainType);
-        values.put(EXERCISE_TYPE, exerciseType);
-        values.put(TIME, time);
-        values.put(DISTANCE, distance);
-        long newRowID = db.insert(TABLE_NAME3, null, values);
-        return "" + newRowID;
-    }
-
     @Override
     public void onCreate(SQLiteDatabase database) {
         createDbTables(database);
@@ -50,6 +38,71 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    private void createDbTables(SQLiteDatabase database) {
+        createTrainsTable(database);
+        createExerciseTable(database);
+        createCommittedExercisesTable(database);
+    }
+
+    private void createTrainsTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
+        database.execSQL("CREATE TABLE "+ TABLE_NAME
+                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT);");
+        values.put(TRAIN_TYPE, "Aerobic");
+        database.insert(TABLE_NAME, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic");
+        database.insert(TABLE_NAME, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
+        database.insert(TABLE_NAME, null, values);
+    }
+
+    private void createExerciseTable(SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
+        database.execSQL("CREATE TABLE "+ TABLE_NAME2
+                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT);");
+        values.put(TRAIN_TYPE, "Aerobic");
+        values.put(EXERCISE_TYPE, "Running");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Aerobic");
+        values.put(EXERCISE_TYPE, "Walking");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Aerobic");
+        values.put(EXERCISE_TYPE, "Swimming");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Aerobic");
+        values.put(EXERCISE_TYPE, "Cycling");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Aerobic");
+        values.put(EXERCISE_TYPE, "Boxing");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic");
+        values.put(EXERCISE_TYPE, "Push-ups");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic");
+        values.put(EXERCISE_TYPE, "Pull-ups");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic");
+        values.put(EXERCISE_TYPE, "Squats");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
+        values.put(EXERCISE_TYPE, "Bench-press");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
+        values.put(EXERCISE_TYPE, "Overhead-press");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
+        values.put(EXERCISE_TYPE, "Push-press");
+        database.insert(TABLE_NAME2, null, values);
+        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
+        values.put(EXERCISE_TYPE, "Deadlift");
+        database.insert(TABLE_NAME2, null, values);
+    }
+
+    private void createCommittedExercisesTable(SQLiteDatabase database) {
+        database.execSQL("CREATE TABLE "+ TABLE_NAME3
+                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT, " +TIME+" TEXT, " +DISTANCE+" TEXT);");
     }
 
     public String[] getTrainTypes() {
@@ -126,71 +179,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
         return exercisesArr;
     }
 
-    private void createDbTables(SQLiteDatabase database) {
-        createTrainsTable(database);
-        createExerciseTable(database);
-        createCommittedExercisesTable(database);
-    }
-
-    private void createTrainsTable(SQLiteDatabase database) {
-        ContentValues values = new ContentValues();
-        database.execSQL("CREATE TABLE "+ TABLE_NAME
-                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT);");
-        values.put(TRAIN_TYPE, "Aerobic");
-        database.insert(TABLE_NAME, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic");
-        database.insert(TABLE_NAME, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
-        database.insert(TABLE_NAME, null, values);
-    }
-
-    private void createExerciseTable(SQLiteDatabase database) {
-        ContentValues values = new ContentValues();
-        database.execSQL("CREATE TABLE "+ TABLE_NAME2
-                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT);");
-        values.put(TRAIN_TYPE, "Aerobic");
-        values.put(EXERCISE_TYPE, "Running");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Aerobic");
-        values.put(EXERCISE_TYPE, "Walking");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Aerobic");
-        values.put(EXERCISE_TYPE, "Swimming");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Aerobic");
-        values.put(EXERCISE_TYPE, "Cycling");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Aerobic");
-        values.put(EXERCISE_TYPE, "Boxing");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic");
-        values.put(EXERCISE_TYPE, "Push-ups");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic");
-        values.put(EXERCISE_TYPE, "Pull-ups");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic");
-        values.put(EXERCISE_TYPE, "Squats");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
-        values.put(EXERCISE_TYPE, "Bench-press");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
-        values.put(EXERCISE_TYPE, "Overhead-press");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
-        values.put(EXERCISE_TYPE, "Push-press");
-        database.insert(TABLE_NAME2, null, values);
-        values.put(TRAIN_TYPE, "Anaerobic - Weightlifting");
-        values.put(EXERCISE_TYPE, "Deadlift");
-        database.insert(TABLE_NAME2, null, values);
-    }
-
-    private void createCommittedExercisesTable(SQLiteDatabase database) {
-        database.execSQL("CREATE TABLE "+ TABLE_NAME3
-                +" ("+ BaseColumns._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + TRAIN_TYPE +" TEXT, " + EXERCISE_TYPE +" TEXT, " +TIME+" TEXT, " +DISTANCE+" TEXT);");
-    }
-
     public String[][] getCommittedExercises() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor committedExercisesTableCursor = db.rawQuery("SELECT * from commited_exercises",null);
@@ -224,6 +212,35 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IModel {
         return committedExercisesTableCursor.getCount();
     }
 
+    //add new exercise to data base
+    public String commitExerciseToDB(String trainType, String exerciseType, String time, String distance){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TRAIN_TYPE, trainType);
+        values.put(EXERCISE_TYPE, exerciseType);
+        values.put(TIME, time);
+        values.put(DISTANCE, distance);
+        long newRowID = db.insert(TABLE_NAME3, null, values);
+        return "" + newRowID;
+    }
 
+    //add new train option to data base
+    public String addOptionTrainToDB(String valueToAdd) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TRAIN_TYPE, valueToAdd);
+        long newRowID = db.insert(TABLE_NAME, null, values);
+        return "" + newRowID;
+    }
+
+    //add new exercise option to data base
+    public String addOptionExerciseToDB(String valueToAdd, String trainType) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TRAIN_TYPE, trainType);
+        values.put(EXERCISE_TYPE, valueToAdd);
+        long newRowID = db.insert(TABLE_NAME2, null, values);
+        return "" + newRowID;
+    }
 
 }

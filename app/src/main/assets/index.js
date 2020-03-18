@@ -9,7 +9,7 @@ setGreetingMsg();
 setGreetingImg();
 setLastThreeTrainings();
 
-
+//TODO fix problem - 3 first exercises shown instead of last
 function setGreetingMsg() {
 	document.getElementById('greetingMsg').innerHTML = getGreetingMsg(getCurrentHourTime());
 }

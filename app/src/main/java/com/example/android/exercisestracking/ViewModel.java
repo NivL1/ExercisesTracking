@@ -23,13 +23,16 @@ public class ViewModel extends Activity implements IViewModel {
 
     @android.webkit.JavascriptInterface
     public void commitExerciseJava(String trainType, String exerciseType, String time, String distance) {
-        final String toShow = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
+        final String confirmation = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
+        webView.evaluateJavascript("confirm('"+confirmation+"')", null);
     }
 
     @android.webkit.JavascriptInterface
-    public void fetchTrainsFromDB() {
+    public void fetchTrainsFromDB(String flag) {
         String[] trainsArr = databaseHelper.getTrainTypes();
         StringBuilder bf = new StringBuilder();
+        bf.append(flag);
+        bf.append("|");
         for (String str: trainsArr) {
             bf.append(str);
             bf.append("|");
@@ -80,8 +83,8 @@ public class ViewModel extends Activity implements IViewModel {
 
         StringBuilder bf = new StringBuilder();
         for (String[] strings : committedExercisesArr) {
-            for (int col = 0; col < strings.length; col++) {
-                bf.append(strings[col]);
+            for (String string : strings) {
+                bf.append(string);
                 bf.append("|");
             }
         }
@@ -128,6 +131,41 @@ public class ViewModel extends Activity implements IViewModel {
                     @Override
                     public void run() {
                         webView.evaluateJavascript("setCommittedExercisesRows('"+rowsNum+"')", null);
+                    }
+                });
+            }
+        });
+    }
+
+    @android.webkit.JavascriptInterface
+    public void addOptionTrainJava(String valueToAdd) {
+        final String confirmation = databaseHelper.addOptionTrainToDB(valueToAdd);
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("confirm('"+confirmation+"')", null);
+                    }
+                });
+            }
+        });
+
+    }
+
+    @android.webkit.JavascriptInterface
+    public void addOptionExerciseJava(String valueToAdd, String trainType) {
+        final String confirmation = databaseHelper.addOptionExerciseToDB(valueToAdd, trainType);
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("confirm('"+confirmation+"')", null);
                     }
                 });
             }
