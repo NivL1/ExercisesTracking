@@ -14,3 +14,15 @@
     font-size: 18px;
     visibility: hidden;
 }
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.bottom ul li a {
+    white-space: normal !important;
+    height: 30px;
+}
