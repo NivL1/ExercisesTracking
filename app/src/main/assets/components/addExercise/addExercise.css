@@ -13,3 +13,12 @@
        font-size: 18px;
        visibility: hidden;
  }
+
+.bottom ul li a {
+    white-space: normal !important;
+    height: 30px;
+}
+
+.center-text {
+    text-align: center;
+}

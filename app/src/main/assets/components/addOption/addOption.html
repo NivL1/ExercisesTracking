@@ -12,8 +12,11 @@
 </head>
 
 <body>
-
-    <div id="div-option"> Add your own train or exercise
+    <div class="center-text">
+        <h2> Add Option </h2>
+        <h4> Add your own train or exercise </h4>
+    </div>
+    <div id="div-option">
         <select id="select-option" onchange="onOptionToAddChange()">
             <option selected disabled hidden>Select Train / Exercise</option>
             <option>Train</option>
@@ -26,7 +29,7 @@
 
 </body>
 
-<footer data-position="fixed" data-theme="a">
+<footer data-role="footer" data-position="fixed">
     <div class="bottom" data-role="navbar">
         <ul>
             <li><a href="../../index.html" data-prefetch="true" data-transition="fade">Main</a></li>
@@ -38,4 +41,5 @@
 </footer>
 
 <script src="addOption.js"></script>
+<script src="../addExercise/addExercise.js"></script>
 </html>

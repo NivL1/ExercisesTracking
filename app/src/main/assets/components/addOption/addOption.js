@@ -3,8 +3,6 @@ var flag2 = "2";
 var dataToAdd = null;
 
 function onOptionToAddChange() {
-    // document.getElementById("train-option-div").style.visibility = "hidden";
-    // document.getElementById("exercise-option-div").style.visibility = "hidden";
     var optionSelectElement = document.getElementById("select-option");
     selectedOption = optionSelectElement.options[optionSelectElement.selectedIndex].value;
     var optionSelectedElement = $("#div-option-selected");
@@ -23,7 +21,6 @@ function onOptionToAddChange() {
     else if (selectedOption === "Exercise") {
         window.vm.fetchTrainsFromDB(flag2);
     }
-
 
 }
 

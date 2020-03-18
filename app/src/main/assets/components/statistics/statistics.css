@@ -24,3 +24,7 @@ body {
     white-space: normal !important;
     height: 30px;
 }
+
+.center-text {
+    text-align: center;
+}
