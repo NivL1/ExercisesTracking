@@ -62,9 +62,9 @@ function showLastThreeTrainings(lastThreeTrainings) {
 
 function getLastThreeTrainings() {
     var lastThreeTrainings = [];
-    committedExercisesTable.forEach(function (row, index) {
-        lastThreeTrainings.push(row[2]);
-    })
+    for (var indexOffset = 1; indexOffset < 4; indexOffset++) {
+        lastThreeTrainings.push(committedExercisesTable[committedExercisesTable.length - indexOffset][2]);
+    }
     return lastThreeTrainings;
 }
 

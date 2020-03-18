@@ -22,7 +22,6 @@ function onOptionToAddChange() {
 
     else if (selectedOption === "Exercise") {
         window.vm.fetchTrainsFromDB(flag2);
-
     }
 
 
