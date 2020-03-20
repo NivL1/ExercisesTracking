@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.select-from-to {
+    display: inline-block;
+}
+
 table {
     font-size: 13px;
     margin: 0 auto;

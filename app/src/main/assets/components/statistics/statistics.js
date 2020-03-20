@@ -4,6 +4,7 @@ var committedExercisesTable = [];
 
 applyLocalFileBrowsing();
 fetchCommittedExercises();
+getNumberOfRows();
 //TODO create a promise istead of simple sleep
 setTimeout(() => { createStatisticsTable(); }, 500);
 
@@ -69,6 +70,49 @@ function createStatisticsTable()
 	})
 }
 
+function getNumberOfRows() {
+	window.vm.getCommittedExercisesCountJava();
+}
+
+function setNumberOfRows(numRows) {
+	numRows = parseInt(numRows);
+	var numRowsArray = Array.from(Array(numRows).keys());
+	numRowsArray = numRowsArray.splice(1);
+	let fromOptions = document.getElementById('select-from').options;
+	let toOptions = document.getElementById('select-to').options;
+	numRowsArray.forEach(option =>
+		fromOptions.add(
+			new Option(option,option)
+		));
+	numRowsArray.forEach(option =>
+		toOptions.add(
+			new Option(option,option)
+		));
+
+}
+
+function createCustomizedTable() {
+	let tableDiv = $("#div-table");
+	var table = $("#statisticsTable");
+	table.remove();
+	var newTable = document.createElement("TABLE");
+	newTable.setAttribute('id', "statisticsTable");
+	let fromElement = document.getElementById("select-from")
+	let fromValue =	fromElement.options[fromElement.selectedIndex].value;
+	let toElement = document.getElementById("select-to")
+	let toValue = toElement.options[toElement.selectedIndex].value;
+	var newCommittedExercisesTable = committedExercisesTable.slice(fromValue-1, toValue);
+	tableDiv.append(newTable);
+	newTable = document.getElementById("statisticsTable");
+	addColTitle(newTable);
+	newCommittedExercisesTable.forEach(function (committedRow, index) {
+		let row = newTable.insertRow(index+1);
+		for (col = 0; col < tableNumOfCols; col++) {
+			row.insertCell(col).innerHTML = committedRow[col];
+		}
+	})
+}
+
 function fetchCommittedExercises() {
     window.vm.getCommittedExercisesCols();
     window.vm.getCommittedExercisesRows();
@@ -87,6 +131,7 @@ function putCommittedExercises(committedExercisesString) {
         committedExercisesTable.push(rowArray);
         rowArray= [];
     }
+
 }
 
 function setCommittedExercisesCols(num) {

@@ -24,7 +24,18 @@ public class ViewModel extends Activity implements IViewModel {
     @android.webkit.JavascriptInterface
     public void commitExerciseJava(String trainType, String exerciseType, String time, String distance) {
         final String confirmation = databaseHelper.commitExerciseToDB(trainType, exerciseType, time, distance);
-        webView.evaluateJavascript("confirm('"+confirmation+"')", null);
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("confirm('"+confirmation+"')", null);
+                    }
+                });
+            }
+        });
     }
 
     @android.webkit.JavascriptInterface
@@ -166,6 +177,23 @@ public class ViewModel extends Activity implements IViewModel {
                     @Override
                     public void run() {
                         webView.evaluateJavascript("confirm('"+confirmation+"')", null);
+                    }
+                });
+            }
+        });
+    }
+
+    @android.webkit.JavascriptInterface
+    public void getCommittedExercisesCountJava(){
+        final String numRows = databaseHelper.getExercisesCountFromDB();
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                ViewModel.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.evaluateJavascript("setNumberOfRows('"+numRows+"')", null);
                     }
                 });
             }
