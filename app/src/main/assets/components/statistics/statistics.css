@@ -32,3 +32,17 @@ body {
 .center-text {
     text-align: center;
 }
+
+label {
+    float: left;
+}
+
+span {
+    display: block;
+    overflow: hidden;
+    padding: 0 4px 0 6px
+}
+
+.number-input {
+    width: 80px;
+}

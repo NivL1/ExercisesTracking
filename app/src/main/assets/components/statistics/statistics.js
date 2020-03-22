@@ -97,11 +97,19 @@ function createCustomizedTable() {
 	table.remove();
 	var newTable = document.createElement("TABLE");
 	newTable.setAttribute('id', "statisticsTable");
-	let fromElement = document.getElementById("select-from")
-	let fromValue =	fromElement.options[fromElement.selectedIndex].value;
-	let toElement = document.getElementById("select-to")
-	let toValue = toElement.options[toElement.selectedIndex].value;
-	var newCommittedExercisesTable = committedExercisesTable.slice(fromValue-1, toValue);
+	let fromValue = Number(document.getElementById("minNum").value)
+	let toValue = Number(document.getElementById("maxNum").value)
+
+    if (toValue < fromValue)
+        var newCommittedExercisesTable = committedExercisesTable;
+    else {
+        if (fromValue == 0)
+            var newCommittedExercisesTable = committedExercisesTable.slice(fromValue, toValue);
+    	else
+    	    var newCommittedExercisesTable = committedExercisesTable.slice(fromValue-1, toValue);
+    }
+
+
 	tableDiv.append(newTable);
 	newTable = document.getElementById("statisticsTable");
 	addColTitle(newTable);

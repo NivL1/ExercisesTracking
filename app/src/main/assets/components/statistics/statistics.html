@@ -15,16 +15,21 @@
 </head>
 
 <body>
-    <h2 class="center-text"> Your committed exercises </h2>
-    <div id="div-from-to">
-        <select name="from" class="select-from-to" id="select-from">
-            <option selected disabled hidden>Show Exercises from</option>
-        </select>
-        <select name="to" class="select-from-to" id="select-to">
-            <option selected disabled hidden>Show Exercises to</option>
-        </select>
-        <input type="submit" class="select-from-to" value="Submit" onclick="createCustomizedTable()">
+    <h2 > Your committed exercises </h2>
+    <div class="center-text">
+        <label for="minNum">Show Exercises from</label>
+        <span class="number-input">
+            <input type="number" id="minNum">
+        </span>
+
+        <label for="maxNum">To</label>
+        <span class="number-input">
+            <input type="number" id="maxNum">
+        </span>
     </div>
+
+    <input type="submit" class="select-from-to" value="Submit" onclick="createCustomizedTable()">
+
     <div id="div-table">
        <table id="statisticsTable"> </table>
     </div>
