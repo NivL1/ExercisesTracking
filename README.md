@@ -6,4 +6,4 @@ An Android app
 
 
 
-[API](ExercisesTracking/JavaDocs)
+[API](https://github.com/NivL1/ExercisesTracking/tree/master/JavaDoc)
