@@ -1,6 +1,12 @@
 # ExercisesTracking Android App 
 An Android application, provides trainers an exercises tracking ability
 
+### General information
+- App programmed in Java and JavaScript
+- App's interface uses web view and JQuery Mobile packege
+- Inner SQLite Data base used 
+- App programmed with MVC design pattern logic
+
 ### Setup development environment
 - [Android studio](https://developer.android.com/studio)
 
@@ -9,11 +15,6 @@ An Android application, provides trainers an exercises tracking ability
 
 ### API
 - [API](https://github.com/NivL1/ExercisesTracking/tree/master/JavaDoc)
-
-### General information
-- App is written in Java and JavaScript
-- App's interface uses web view and JQuery Mobile packege
-- Inner SQLite Data base used 
 
 ## Notice
 - The app runs on android studio 2
