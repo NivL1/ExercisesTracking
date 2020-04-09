@@ -6,4 +6,4 @@ An Android app
 
 
 
-[API](/JavaDocs)
+[API](docs/JavaDocs)
